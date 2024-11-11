@@ -1,0 +1,137 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #F4F4F9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    background-color: #A02334; 
+    padding: 15px;
+    color: white;
+    border-radius: 8px;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #A02334; 
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #FFAD60; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+thead {
+    background-color: #A02334; 
+    color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+th:last-child, td:last-child {
+    max-width: 150px;
+    text-align: center;  
+}
+
+tr:nth-child(even) {
+    background-color: #FFEEAD; 
+}
+
+tr:hover {
+    background-color: #96CEB4; 
+    color: #fff;
+}
+
+.edit, .delete {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-right: 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #A02334; 
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.edit:hover, .delete:hover {
+    background-color: #FFAD60; 
+    color: #fff;
+}
+
+.delete {
+    color: #FF4C4C; 
+}
+
+.edit:hover {
+    background-color: #A02334; 
+    color: #fff;
+}
+
+.delete:hover {
+    background-color: #FF4C4C;
+    color: #fff;
+}
+
+.form-group {
+    display: flex;
+    align-items: center; 
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    width: 100px; 
+    text-align: right;
+    margin-right: 8px;
+}
+
+.form-group input {
+    flex: 1;
+    max-width: 200px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
