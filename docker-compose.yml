@@ -1,0 +1,23 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5000"
+    depends_on:
+      - db
+    environment:
+      - FLASK_ENV=development
+      - MYSQL_HOST=db
+      - MYSQL_USER=flaskpia
+      - MYSQL_PASSWORD=12345pass
+      - MYSQL_DB=basketball_team
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: flaskpia
+      MYSQL_PASSWORD: 12345pass
+      MYSQL_DATABASE: basketball_team
+    ports:
+      - "3306:3306"
