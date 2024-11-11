@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, g
 from flask_mysqldb import MySQL
 import os
 import MySQLdb.cursors
@@ -7,12 +7,14 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # MySQL Configuration
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = 'db'
 app.config['MYSQL_USER'] = 'flaskpia'
 app.config['MYSQL_PASSWORD'] = '12345pass'
 app.config['MYSQL_DB'] = 'basketball_team'
 
 mysql = MySQL(app)
+
+table_created = False
 
 # Show all players
 @app.route('/')
@@ -82,6 +84,31 @@ def delete_player(id):
     cursor.execute("DELETE FROM players WHERE id = %s", (id,))
     mysql.connection.commit()
     return redirect(url_for('index'))
+
+# Create table if it doesn't exist
+@app.before_request
+def create_tables():
+    global table_created
+    if not table_created:
+        with mysql.connection.cursor() as cursor:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS players (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100),
+                    height FLOAT,
+                    weight FLOAT,
+                    age INT,
+                    years_playing INT,
+                    salary FLOAT,
+                    points_per_game FLOAT,
+                    rebounds_per_game FLOAT,
+                    steals_per_game FLOAT,
+                    blocks_per_game FLOAT,
+                    turnovers_per_game FLOAT
+                );
+            """)
+            mysql.connection.commit()
+        table_created = True
 
 if __name__ == '__main__':
     app.run(debug=True)
