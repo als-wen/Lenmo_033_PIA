@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Equipo de Basketball</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Jugadores</h1>
+            <a href="{{ url_for('add_player') }}" class="button">Agregar Nuevo Jugador</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Altura</th>
+                        <th>Peso</th>
+                        <th>Edad</th>
+                        <th>Años jugando</th>
+                        <th>Salario</th>
+                        <th>Puntos</th>
+                        <th>Rebotes</th>
+                        <th>Robos</th>
+                        <th>Bloqueos</th>
+                        <th>Perdidas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in players %}
+                    <tr>
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.height }}</td>
+                        <td>{{ player.weight }}</td>
+                        <td>{{ player.age }}</td>
+                        <td>{{ player.years_playing }}</td>
+                        <td>${{ player.salary }}</td>
+                        <td>{{ player.points_per_game }}</td>
+                        <td>{{ player.rebounds_per_game }}</td>
+                        <td>{{ player.steals_per_game }}</td>
+                        <td>{{ player.blocks_per_game }}</td>
+                        <td>{{ player.turnovers_per_game }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_player', id=player.id) }}" class="edit">Editar</a>
+                            <a href="{{ url_for('delete_player', id=player.id) }}" class="delete">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
