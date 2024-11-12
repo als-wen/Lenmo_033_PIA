@@ -3,7 +3,11 @@ pipeline {
 
     environment {
         FLASK_APP = 'app.py'
-        DOCKER_IMAGE = 'team-crud'  
+        DOCKER_IMAGE = 'team-crud'
+    }
+
+    parameters {
+        booleanParam(name: 'STOP_CONTAINER', defaultValue: false, description: 'Check this to stop the Docker container.')
     }
 
     stages {
@@ -13,22 +17,32 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build and Run Docker Container') {
             steps {
                 script {
-                    sh 'docker compose down'  
-                    sh 'docker compose up -d --build'  
+                    sh 'docker-compose up -d --build'
+                }
+            }
+        }
+
+        stage('Stop Docker Container') {
+            when {
+                expression { params.STOP_CONTAINER } 
+            }
+            steps {
+                script {
+                    sh 'docker-compose down' 
                 }
             }
         }
     }
-    
+
     post {
         success {
-            echo 'The Flask application is now running!'
+            echo 'The pipeline executed successfully!'
         }
         failure {
-            echo 'The build or deployment failed. Check logs for details.'
+            echo 'An error occurred. Check logs for details.'
         }
     }
 }
